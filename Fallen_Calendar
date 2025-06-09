@@ -1,0 +1,120 @@
+<br /><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrmodea Calendar Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .converter {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e0f7fa;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Arrmodea Date Converter</h1>
+  <div class="converter">
+    <label for="month">Month (1-12):</label>
+    <input type="number" id="month" min="1" max="12">
+
+    <label for="day">Day (1-31):</label>
+    <input type="number" id="day" min="1" max="31">
+
+    <label for="year">Year (use negative for BC):</label>
+    <input type="number" id="year" value="2025">
+
+    <button onclick="convertDate()">Convert to Arrmodea</button>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    function convertDate() {
+      const month = parseInt(document.getElementById("month").value);
+      const day = parseInt(document.getElementById("day").value);
+      const year = parseInt(document.getElementById("year").value);
+
+      if (isNaN(month) || isNaN(day) || isNaN(year)) {
+        document.getElementById("output").innerText = "Please enter valid numbers for all fields.";
+        return;
+      }
+
+      const inputDate = new Date(year, month - 1, day);
+      const anchorDate = new Date(2025, 2, 23); // March 23, 2025
+
+      const diffTime = inputDate - anchorDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      const seasonNames = ["Spring", "Summer", "Fall", "Winter"];
+      const seasonLength = 92;
+      const weekLength = 23;
+
+      let arrmodeaDay = 90 + diffDays; // Anchor is day 90 of Fallen Year 1
+
+      let result = "";
+
+      if (diffDays >= 0) {
+        // Post-Anchor: Fallen Years
+        let seasonIndex = Math.floor((arrmodeaDay - 1) % 368 / seasonLength);
+        let seasonDay = (arrmodeaDay - 1) % seasonLength;
+        let week = Math.floor(seasonDay / weekLength) + 1;
+        let dayOfWeek = (seasonDay % weekLength) + 1;
+        let fallenYear = Math.floor((arrmodeaDay - 90) / 368) + 1; // Adjusted so March 23, 2025 = Year 1
+
+        result = `${seasonNames[seasonIndex]}, Week ${week}, Lunar Day ${dayOfWeek}, Arrmodea Fallen Year ${fallenYear}`;
+      } else {
+        // Pre-Anchor: Era of the 7 Gods
+        const daysBefore = Math.abs(diffDays);
+        let totalOffset = daysBefore + (368 - 90);
+        let yearOffset = Math.floor(totalOffset / 368);
+        let daysIntoYear = totalOffset % 368;
+
+        let seasonIndex = Math.floor(daysIntoYear / seasonLength);
+        let seasonDay = daysIntoYear % seasonLength;
+        let week = Math.floor(seasonDay / weekLength) + 1;
+        let dayOfWeek = (seasonDay % weekLength) + 1;
+
+        let eraYear;
+        if (year < 0) {
+          eraYear = 5000 + year; // 5000 BC = Year 1
+        } else {
+          eraYear = 5000 + year - 1; // 1 AD = Year 5000, 2024 = 7024
+        }
+
+        result = `${seasonNames[seasonIndex]}, Week ${week}, Lunar Day ${dayOfWeek}, Era of the 7 Gods Year ${eraYear}`;
+
+        if (year < 0) {
+          result += ` (${Math.abs(year)} BC)`;
+        } else {
+          result += ` (${year} AD)`;
+        }
+      }
+
+      document.getElementById("output").innerText = result;
+    }
+  </script>
+</body>
+</html>
