@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG2.HTML</title>
+    <style>
+        /*CSS code*/
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 25px;
+            font-size: 19px;
+        }
+
+        .next {
+            color: #e0115f;
+            cursor: progress;
+        }
+
+        .clicker {
+            color: #2ae611;
+            cursor: grab;
+        }
+    </style>
+</head>
+    <body>
+        <h1>Story</h1>
+        <input id="Name" type="Text" placeholder="User">
+        <p id="Opening">
+            Before I forget this will run like D&D if you know it good.<br/>
+            <br/>
+            If not, I will explain it for how it works in lore...<br/>
+            <br/>
+            You will talk to my vessel "Writer" with the options you are given.<br/>
+            <br/>
+            In a way you are helping Writer find you a new story to live through. <br/>
+            <br/>
+            What ever you put into the box the said/say User, will be what we call you.
+        </p>
+        <p id="0">
+            <span id="1" class="next">
+                *began the Story*
+            </span>
+            <br/>
+            <span id="2" class="next"></span>
+            <br/><span id="3" class="clicker">option3</span>
+        </p>
+        <p id="path">...</p>
+        <script>
+            document.getElementById("1").addEventListener   ("click", function(){
+                let handle = document.getElementById("Name").value.trim() || "User";
+                document.getElementById("Opening").innerHTML = `???: "Hello I guess you have some questions, first off you are dead, Second-`;
+                document.getElementById("Opening").id = "S";
+                document.getElementById("path").innerHTML = "S";
+                document.getElementById("1").innerHTML = `*${handle} cut the voice off*`;
+                document.getElementById("1").id = "cut";
+                document.getElementById("2").innerHTML = `*${handle} stays quiet*`;
+                document.getElementById("2").id = "quiet";
+
+                //cut
+                document.getElementById("cut").addEventListener("click", function () {
+                    let handle = document.getElementById("Name").value.trim() || "User";
+                    document.getElementById("S").id += "_1";
+                    document.getElementById("S_1").innerHTML = `${handle}: "What do you mean I am dead?" <br> ???: "Yes you have died... I thought not having a body told you this?"`;
+                    document.getElementById("path").innerHTML += "1";
+                    document.getElementById("cut").id = "DidNotKnow";
+                    document.getElementById("DidNotKnow").innerHTML = `${handle}: "Oh, I didn't even notice I didn't have one."`;
+                    document.getElementById("quiet").id = "noticed";
+                    document.getElementById("noticed").innerHTML = `${handle}:"I am still in shock over it all, sorry"`;
+                    //just found out was dead
+                    document.getElementById("DidNotKnow").addEventListener("click", function () {
+                        let handle = document.getElementById("Name").value.trim() || "User";
+                        document.getElementById("S_1").innerHTML = `${handle}:"Can you please continue" ???:"Yes I can, you may have noticed that this 'afterlife' or what you will call it seems off. That is because I had interfered with where you would end up."`;
+                        document.getElementById("path").innerHTML += "1";
+                        document.getElementById("S_1").id += "_1";
+                        document.getElementById("DidNotKnow").innerHTML = `${handle}:"You can do that?"`;
+                        document.getElementById("DidNotKnow").id = "You";
+                        document.getElementById("noticed").innerHTML = `${handle}:"Okay"`;
+                        document.getElementById("noticed").id = "Okay";
+                        //how did you that
+                        document.getElementById("You").addEventListener("click", function () {
+                            let handle = document.getElementById("Name").value.trim() || "User";
+                            document.getElementById("path").innerHTML += "1";
+                            document.getElementById("S_1_1").innerHTML = `${handle}:"Oh you can do that?"<br>???:"Yes I can, your story endded so abroftly I want to read a new one made by you. As you can see this is a Library, so to say, the realm you are in is based on the 'Tower of Babel' but we have 4 visual sections, as you can see."<br> *The voice seem to now have a physical form, looks human but some details seem to change, mainly what seems to be a brith mark that moves form the right wrist (a oval with stars in it) up the arm then it wraps around the right shoulder (think a line around the whole joint), then you notice the outfit has a hole right on the collarbone followed by the mark moving and becoming a heart in the middle of the hole, then it runs to the back, then back to the right wrist*<br>"Oh where are my manners, you can call me <strong>Writer</strong>."`;
+                            document.getElementById("S_1_1").id += "_1";
+                            document.getElementById("You").innerHTML=`${handle}:"..."`;
+                            document.getElementById("You").id = "notalk";
+                            document.getElementById("Okay").innerHTML=``;
+                            document.getElementById("Okay").id = "blank";
+                            document.getElementById("1").addEventListener("click", function(){
+                                let handle = document.getElementById("Name").value.trim() || "User";
+                                document.getElementById("S_1_1_1").innerHTML=`Break`;
+                            });
+                        });
+                        //keep going
+                        document.getElementById("Okay").addEventListener("click", function () {
+                            let handle = document.getElementById("Name").value.trim() || "User";
+                            document.getElementById("path").innerHTML += "2";
+                            document.getElementById("S_1_1").innerHTML = `Blank`;
+                            document.getElementById("S_1_1").id += "_2";
+                            document.getElementById("You").innerHTML=`______`;
+                            document.getElementById("You").id = "1";
+                            document.getElementById("Okay").innerHTML=`______`;
+                            document.getElementById("Okay").id = "2";
+                        });
+                    });
+                    //noticed was dead
+                    document.getElementById("noticed").addEventListener("click", function () {
+                        let handle = document.getElementById("Name").value.trim() || "User";
+                        document.getElementById("S_1").innerHTML = `${handle}:"I am still in shock over it all to tell you the truth, I am sorry if that was rude."\n ???:"It is all fine I am not shocked that you feel this way, but I am shocked that you cut me off. So let me finish, You will notice that this 'afterlife' or what you will call it seems off. That is because I had interfered with where you would end up."`;
+                        document.getElementById("S_1").id += "_2";
+                        document.getElementById("path").innerHTML += "2";
+                        document.getElementById("DidNotKnow").innerHTML = `${handle}:"Oh you can do that?"`;
+                        document.getElementById("DidNotKnow").id = "Oh";
+                        document.getElementById("noticed").innerHTML = `${handle}:"Continue"`;
+                        document.getElementById("noticed").id = "Continue";
+                        //oh
+                        ocument.getElementById("You").addEventListener("click", function () {
+                            let handle = document.getElementById("Name").value.trim() || "User";
+                            document.getElementById("path").innerHTML += "1";
+                            document.getElementById("S_1_1").innerHTML = `${handle}:"Oh you can do that?"<br>???:"Yes I can, your story endded so abroftly I want to read a new one made by you. As you can see this is a Library, so to say, the realm you are in is based on the 'Tower of Babel' but we have 4 visual sections, as you can see."<br> *The voice seem to now have a physical form, looks human but some details seem to change, mainly what seems to be a brith mark that moves form the right wrist (a oval with stars in it) up the arm then it wraps around the right shoulder (think a line around the whole joint), then you notice the outfit has a hole right on the collarbone followed by the mark moving and becoming a heart in the middle of the hole, then it runs to the back, then back to the right wrist*<br>"Oh where are my manners, you can call me <strong>Writer</strong>."`;
+                            document.getElementById("S_1_1").id += "_1";
+                            document.getElementById("You").innerHTML=`${handle}:"..."`;
+                            document.getElementById("You").id = "notalk";
+                            document.getElementById("Okay").innerHTML=``;
+                            document.getElementById("Okay").id = "blank";
+                        });
+                        //continue
+                    });
+                });
+                //let him talk
+                document.getElementById("quiet").addEventListener("click", function () {
+                    let handle = document.getElementById("Name").value.trim() || "User";
+                    document.getElementById("S").innerHTML = `???:"You may have noticed that this 'afterlife' or what you will call it seems off. That is because I had interfered with where you would end up. I am going to help you choose a new 'life' for you to go into, we just need to write it first"`;
+                    document.getElementById("S").id += "_2";
+                    document.getElementById("path").innerHTML += "2";
+                    document.getElementById("cut").innerHTML = `*you try to speak by nothing comes out, you dont even seem to have vocal-cords*`;
+                    document.getElementById("cut").id = "no_speak";
+                    document.getElementById("quiet").innerHTML = `${handle}:"I am still in shock over it all, sorry"`;
+                    document.getElementById("quiet").id = "agree";
+                    //no speak
+
+                    //agree
+
+                });
+            })
+        </script>
+    </body>
+</html>
