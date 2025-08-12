@@ -104,7 +104,7 @@
           eraYear = 5000 + year - 1; // 1 AD = Year 5000, 2024 = 7024
         }
 
-        result = `${seasonNames[seasonIndex]}, Week ${week}, Lunar Day ${dayOfWeek}, Era of the 7 Gods Year ${eraYear}`;
+        result = `${seasonNames[seasonIndex]}, Week ${week}, Lunar Day ${dayOfWeek}, Era of the 7 Gods`;
 
         if (year < 0) {
           result += ` (${Math.abs(year)} BC)`;
