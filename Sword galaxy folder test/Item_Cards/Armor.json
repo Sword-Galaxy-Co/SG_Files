@@ -1,0 +1,38 @@
+{
+    "IRL_Suit_M": {
+        "id": "IRL_Suit_M",
+        "name": "Work Suit",
+        "type": "Origin_Item",
+        "subtype": "Armor",
+        "rarity": "useless",
+        "stats":{
+            "defense": 2,
+            "energy_buff": 0
+        },
+        "description": "Your work suit that you didn't change out off before entered, what you thought to be a Inn. But this, is not what you could've imagined... THIS."
+    },
+    "IRL_Suit_F":{
+        "id": "IRL_Suit_F",
+        "name": "Work Dress",
+        "type": "Origin_Item",
+        "subtype": "Armor",
+        "rarity": "useless",
+        "stats":{
+            "defense": 2,
+            "energy_buff": 0
+        },
+        "description": "Your work dress that you didn't change out off before entered, what you thought to be a Inn. But this, is not what you could've imagined... THIS."
+    },
+    "IRL_Suit_N":{
+        "id": "IRL_Suit_N",
+        "name": "Ever day outfit",
+        "type": "Origin_Item",
+        "subtype": "Armor",
+        "rarity": "useless",
+        "stats":{
+            "defense": 2,
+            "energy_buff": 0
+        },
+        "description": "Your everyday outfit that you wear before you entered, what you thought to be a Inn. But this, is not what you could've imagined... THIS."
+    }
+}
